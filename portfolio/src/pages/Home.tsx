@@ -1,24 +1,58 @@
+import React, { useRef, useState } from "react";
 import "./Home.css";
 
 const projects = [
   {
-    title: "Velvet Room App",
-    description: "A stylish React app inspired by Persona menus. Features dynamic cards, animated transitions, and a mint blue palette.",
-    link: "#",
+    title: "Tea Time",
+    description:
+      "A tea-themed web app to explore different types of tea, brew them, and share thoughts about them on a social forum! (please be patient with loading times as this is hosted with a live server on render",
+    link: "https://teatime-wcue.onrender.com/",
   },
   {
-    title: "Social Link Tracker",
-    description: "Track your connections and progress, Persona-style. Built with TypeScript and custom SVG icons.",
-    link: "#",
+    title: "Poképort",
+    description:
+      "A web app that allows you to view average market card prices for Pokémon TCG cards, and with account creation, allows you to track progress of completion on any given set of cards!",
+    link: "https://www.pokeport.org/",
   },
   {
-    title: "Shadow Gallery",
-    description: "A gallery of creative works with layered, animated cards and a modern Persona-inspired UI.",
+    title: "In Progress",
+    description: "Still Working on this one! Check back later for updates.",
     link: "#",
   },
 ];
 
 export default function Home() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle"
+  );
+
+  // Uses Formspree for email delivery (no backend required)
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdoqzqzv"; // Replace with your own Formspree endpoint if needed
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("sending");
+    const form = formRef.current;
+    if (!form) return;
+    const data = new FormData(form);
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setStatus("sent");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <main className="persona-main">
       {/* Persona-style angled header */}
@@ -32,20 +66,21 @@ export default function Home() {
           />
         </div>
         <div className="persona-header-content">
-          <h1 className="persona-title">Your Name</h1>
+          <h1 className="persona-title">Eldrish Ramos</h1>
           <p className="persona-subtitle">
-            Frontend Developer <span className="persona-dot" /> React Enthusiast <span className="persona-dot" /> Lifelong Learner
+            Frontend Developer <span className="persona-dot" /> Bootstrap Enjoyer{" "}
+            <span className="persona-dot" /> Lifelong Learner
           </p>
           <div className="persona-links">
-            <a href="mailto:your@email.com" className="persona-btn email">
-              Email
-            </a>
-            <a href="https://github.com/yourusername" className="persona-btn github" target="_blank" rel="noopener">
+            <a
+              href="https://github.com/Eldrish-Ramos"
+              className="persona-btn github"
+              target="_blank"
+              rel="noopener"
+            >
               GitHub
             </a>
-            <a href="https://linkedin.com/in/yourusername" className="persona-btn linkedin" target="_blank" rel="noopener">
-              LinkedIn
-            </a>
+            {/* You can add more links here if needed */}
           </div>
         </div>
       </header>
@@ -54,7 +89,9 @@ export default function Home() {
       <section className="persona-about-card">
         <h2 className="persona-section-title">About Me</h2>
         <p className="persona-about-text">
-          I am a passionate developer with experience in building modern web applications using React, TypeScript, and other cutting-edge technologies. I love learning new things and collaborating on exciting projects.
+          I am a recent full-stack Web Developer with my 1 year of experienece in
+          the field. I am a bootcamp graduate of a full-stack web development
+          course (six month term) offered by the University of Minnesota.
         </p>
       </section>
 
@@ -68,12 +105,59 @@ export default function Home() {
               <div className="persona-project-content">
                 <h3 className="persona-project-title">{project.title}</h3>
                 <p className="persona-project-desc">{project.description}</p>
-                <a href={project.link} className="persona-project-link" target="_blank" rel="noopener">
+                <a
+                  href={project.link}
+                  className="persona-project-link"
+                  target="_blank"
+                  rel="noopener"
+                >
                   View Project
                 </a>
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
+      <section className="persona-contact-section">
+        <h2 className="persona-section-title">Contact Me</h2>
+        <form
+          className="persona-contact-form"
+          action="https://formspree.io/f/mgvynqpj"
+          method="POST"
+          autoComplete="off"
+        >
+          <div className="persona-form-row">
+            <input
+              className="persona-input"
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+              autoComplete="off"
+            />
+          </div>
+          <div className="persona-form-row">
+            <textarea
+              className="persona-input persona-textarea"
+              name="message"
+              placeholder="Your Message"
+              required
+              rows={4}
+              autoComplete="off"
+            />
+          </div>
+          <button
+            className="persona-btn persona-contact-btn"
+            type="submit"
+          >
+            Send
+          </button>
+        </form>
+        <div className="persona-contact-note">
+          This form will send your message to{" "}
+          <b>Eldrish.ramosperez@gmail.com</b>
         </div>
       </section>
     </main>

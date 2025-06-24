@@ -27,8 +27,7 @@ export default function Home() {
     "idle"
   );
 
-  // Uses Formspree for email delivery (no backend required)
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdoqzqzv"; // Replace with your own Formspree endpoint if needed
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdoqzqzv";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -124,7 +123,8 @@ export default function Home() {
         <h2 className="persona-section-title">Contact Me</h2>
         <form
           className="persona-contact-form"
-          action="https://formspree.io/f/mgvynqpj"
+          ref={formRef}
+          onSubmit={handleSubmit}
           method="POST"
           autoComplete="off"
         >
@@ -151,9 +151,24 @@ export default function Home() {
           <button
             className="persona-btn persona-contact-btn"
             type="submit"
+            disabled={status === "sending"}
           >
-            Send
+            {status === "sending"
+              ? "Sending..."
+              : status === "sent"
+              ? "Sent!"
+              : "Send"}
           </button>
+          {status === "error" && (
+            <div className="persona-form-error">
+              Something went wrong. Please try again later.
+            </div>
+          )}
+          {status === "sent" && (
+            <div className="persona-form-success">
+              Thank you! Your message has been sent.
+            </div>
+          )}
         </form>
         <div className="persona-contact-note">
           This form will send your message to{" "}

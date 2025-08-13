@@ -41,27 +41,37 @@ export default function Home() {
     "idle"
   );
 
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdoqzqzv";
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mgvynqpj";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("sending");
     const form = formRef.current;
     if (!form) return;
+    
     const data = new FormData(form);
+    
     try {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         body: data,
-        headers: { Accept: "application/json" },
+        headers: { 
+          Accept: "application/json" 
+        },
       });
+      
+      const result = await res.json();
+      
       if (res.ok) {
         setStatus("sent");
         form.reset();
+        console.log("Email sent successfully!");
       } else {
+        console.error("Formspree error:", result);
         setStatus("error");
       }
-    } catch {
+    } catch (error) {
+      console.error("Network error:", error);
       setStatus("error");
     }
   }
@@ -99,7 +109,7 @@ export default function Home() {
           <div className="container h-100 position-relative">
             <div className="row align-items-center h-100" style={{minHeight: '700px'}}>
               <div className="col-lg-8">
-                <div className="hero-content ms-4">
+                <div className="hero-content">
                   <span className="badge text-black px-4 py-2 mb-4 rounded-pill" 
                     style={{backgroundColor: '#FFD700', fontFamily: "'Orbitron', monospace"}}>
                     Project Ready
@@ -119,22 +129,22 @@ export default function Home() {
                     Web Developer | University of Minnesota Bootcamp Graduate
                   </p>
                   
-                  <div className="hero-buttons d-flex flex-wrap gap-3">
-                    <button className="btn btn-lg rounded-2 px-4 py-3 fw-bold" 
-                      style={{
-                        backgroundColor: '#FFD700',
-                        color: 'black',
-                        boxShadow: '8px 8px 0px black',
-                        border: 'none',
-                        fontFamily: "'Poppins', sans-serif"
-                      }}>
-                      <i className="me-2"></i>VIEW PROJECTS
-                    </button>
-                    <button className="btn btn-outline-light btn-lg rounded-2 px-4 py-3 fw-bold border-4" 
-                      style={{fontFamily: "'Poppins', sans-serif"}}>
-                      <i className="me-2"></i>DOWNLOAD CV
-                    </button>
-                  </div>
+                  <button className="btn btn-lg rounded-2 px-4 py-3 fw-bold" 
+                    style={{
+                      backgroundColor: '#FFD700',
+                      color: 'black',
+                      boxShadow: '8px 8px 0px black',
+                      border: 'none',
+                      fontFamily: "'Poppins', sans-serif"
+                    }}
+                    onClick={() => {
+                      const projectsSection = document.querySelector('#projects');
+                      if (projectsSection) {
+                        projectsSection.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}>
+                    <i className="me-2"></i>VIEW PROJECTS
+                  </button>
                 </div>
               </div>
               
@@ -367,32 +377,6 @@ export default function Home() {
                 <p className="text-white fs-5 mb-5" style={{fontFamily: "'Poppins', sans-serif"}}>
                   Let's create something amazing together. Send a message and lets get to work!
                 </p>
-                
-                <div className="d-flex justify-content-center gap-3 flex-wrap">
-                  <button 
-                    className="btn btn-lg fw-bold rounded-3 px-5 py-3"
-                    style={{
-                      backgroundColor: '#FFD700',
-                      color: 'black',
-                      boxShadow: '8px 8px 0px black',
-                      border: 'none',
-                      fontFamily: "'Poppins', sans-serif"
-                    }}
-                    onClick={() => {
-                      const form = document.querySelector('#contact-form') as HTMLFormElement;
-                      if (form) form.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                  >
-                    <i className="me-2"></i>SEND MESSAGE
-                  </button>
-                  <button className="btn btn-primary btn-lg fw-bold rounded-3 px-5 py-3" 
-                    style={{
-                      boxShadow: '8px 8px 0px black',
-                      fontFamily: "'Poppins', sans-serif"
-                    }}>
-                    <i className="me-2"></i>CONNECT
-                  </button>
-                </div>
               </div>
             </div>
             
@@ -448,7 +432,7 @@ export default function Home() {
                   </div>
                   {status === "error" && (
                     <div className="text-danger mt-3 text-end">
-                      Something went wrong. Please try again later.
+                      Failed to send message. Please check the console for details or try again later.
                     </div>
                   )}
                   {status === "sent" && (

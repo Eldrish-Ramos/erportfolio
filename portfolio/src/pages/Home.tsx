@@ -8,6 +8,7 @@ import teatimeImage from "../assets/teatime_optimized.png";
 import pokeportImage from "../assets/pokeport_optimized.png";
 import moportImage from "../assets/moport_optimized.png";
 import pfpImage from "../assets/pfp.png";
+import gary from "../assets/gface.jpg";
 
 const projects = [
   {
@@ -41,8 +42,21 @@ export default function Home() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle"
   );
+  const [imageRevealed, setImageRevealed] = useState(false);
+  const [showPrompt, setShowPrompt] = useState(true);
 
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/mgvynqpj";
+
+  const revealImage = () => {
+    setShowPrompt(false);
+    setImageRevealed(true);
+    
+    // Hide the image again after 3 seconds
+    setTimeout(() => {
+      setImageRevealed(false);
+      setShowPrompt(true);
+    }, 3000);
+  };
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -144,8 +158,20 @@ export default function Home() {
               </div>
               
               <div className="col-lg-4 text-end">
-                <img src="https://placehold.co/384x384" alt="Profile" 
-                  className="img-fluid rounded-circle hero-profile-image" />
+                {showPrompt && (
+                  <div className="hidden-image-container" onClick={revealImage}>
+                    <div className="hidden-image-prompt">
+                      <div className="prompt-icon">✨</div>
+                    </div>
+                    <div className="prompt-text">
+                      Something majestic lies hidden, reveal it?
+                    </div>
+                  </div>
+                )}
+                {imageRevealed && (
+                  <img src={gary} alt="Profile" 
+                    className="img-fluid rounded-circle hero-profile-image-revealed" />
+                )}
               </div>
             </div>
           </div>

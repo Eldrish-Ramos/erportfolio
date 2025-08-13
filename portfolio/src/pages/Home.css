@@ -93,6 +93,76 @@ html, body, #root {
   max-width: 384px;
 }
 
+.hero-profile-image-revealed {
+  opacity: 1;
+  max-width: 384px;
+  animation: revealImage 0.5s ease-in-out;
+}
+
+.hidden-image-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.hidden-image-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.hidden-image-container:hover .hidden-image-prompt {
+  opacity: 1;
+  border-color: #E60012;
+  transform: scale(1.1);
+}
+
+.prompt-text {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.hidden-image-container:hover .prompt-text {
+  opacity: 1;
+}
+
+.prompt-icon {
+  font-size: 1.5rem;
+  color: #E60012;
+}
+
+@keyframes revealImage {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /* About section styling */
 .about-section {
   background-color: #1F2937;

@@ -195,7 +195,7 @@ export default function Home() {
                         <i className="me-3"></i>EDUCATION
                       </h4>
                       <p className="card-text" style={{fontFamily: "'Poppins', sans-serif"}}>
-                        Graduated from the University of Minnesota with a strong 
+                        Graduated from the University of Minnesota Full Stack Web Development Bootcamp with a strong 
                         foundation in web development 
                         technologies.
                       </p>
@@ -310,7 +310,7 @@ export default function Home() {
                       FRONTEND
                     </h3>
                     <p className="card-text" style={{fontFamily: "'Poppins', sans-serif"}}>
-                      Bootstrap, Vite, React HTML5, CSS3, JavaScript
+                      Bootstrap, Vite, React, HTML5, CSS3, JavaScript
                     </p>
                   </div>
                 </div>

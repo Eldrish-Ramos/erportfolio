@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./Home.css";
 
 // Import project images
@@ -85,12 +86,25 @@ export default function Home() {
             <a className="navbar-brand text-danger fs-4 fw-bold ms-3 navbar-brand-style" href="#">
               ER
             </a>
-            <div className="navbar-nav ms-auto me-3">
-              <a className="nav-link text-white me-4" href="#home">Home</a>
-              <a className="nav-link text-white me-4" href="#about">About</a>
-              <a className="nav-link text-white me-4" href="#projects">Projects</a>
-              <a className="nav-link text-white me-4" href="#skills">Skills</a>
-              <a className="nav-link text-white" href="#contact">Contact</a>
+            <button 
+              className="navbar-toggler" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" 
+              aria-expanded="false" 
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <div className="navbar-nav ms-auto me-3">
+                <a className="nav-link text-white me-4" href="#home">Home</a>
+                <a className="nav-link text-white me-4" href="#about">About</a>
+                <a className="nav-link text-white me-4" href="#projects">Projects</a>
+                <a className="nav-link text-white me-4" href="#skills">Skills</a>
+                <a className="nav-link text-white" href="#contact">Contact</a>
+              </div>
             </div>
           </div>
         </nav>

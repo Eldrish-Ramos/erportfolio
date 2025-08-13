@@ -31,15 +31,209 @@ html, body, #root {
   border-bottom: 4px solid #E60012 !important;
 }
 
-/* Hero section adjustments */
+.navbar-brand-style {
+  font-family: 'Orbitron', monospace;
+}
+
+/* Hero section styling */
 .hero-section {
   position: relative;
   overflow: hidden;
+  background: linear-gradient(90deg, #E60012 0%, #DC2626 50%, #991B1B 100%);
+  min-height: 700px;
+}
+
+.hero-overlay {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.hero-row {
+  min-height: 700px;
+}
+
+.hero-badge {
+  background-color: #FFD700;
+  font-family: 'Orbitron', monospace;
 }
 
 .hero-title {
-  line-height: 0.9;
+  font-size: 6rem;
+  font-family: 'Orbitron', monospace;
   text-shadow: 8px 8px 0px black;
+  line-height: 0.9;
+}
+
+.hero-subtitle {
+  font-family: 'Poppins', sans-serif;
+}
+
+.hero-button {
+  background-color: #FFD700;
+  color: black;
+  box-shadow: 8px 8px 0px black;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+.hero-profile-image {
+  opacity: 0.1;
+  max-width: 384px;
+}
+
+/* About section styling */
+.about-section {
+  background-color: #1F2937;
+}
+
+.section-title {
+  font-size: 3rem;
+  font-family: 'Orbitron', monospace;
+}
+
+.section-divider {
+  width: 80px;
+  height: 4px;
+  background-color: #E60012;
+}
+
+.about-image-card {
+  box-shadow: 0px 0px 0px black;
+}
+
+.about-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.about-title {
+  font-family: 'Orbitron', monospace;
+}
+
+.about-text {
+  font-family: 'Poppins', sans-serif;
+}
+
+.card-shadow {
+  box-shadow: 8px 8px 0px black;
+}
+
+.card-title-font {
+  font-family: 'Orbitron', monospace;
+}
+
+.card-text-font {
+  font-family: 'Poppins', sans-serif;
+}
+
+.mission-card {
+  background-color: #FFD700;
+  box-shadow: 8px 8px 0px black;
+}
+
+/* Projects section styling */
+.projects-section {
+  background-color: #1F2937;
+}
+
+.project-card {
+  box-shadow: 8px 8px 0px black;
+}
+
+.project-image {
+  height: 192px;
+  object-fit: cover;
+}
+
+.project-title {
+  font-family: 'Orbitron', monospace;
+}
+
+.project-description {
+  font-family: 'Poppins', sans-serif;
+}
+
+.project-tags {
+  font-family: 'Poppins', sans-serif;
+}
+
+.project-visit-button {
+  background-color: #FFD700;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Skills section styling */
+.skills-section {
+  background-color: #1F2937;
+}
+
+.skill-card-red {
+  background-color: #E60012;
+  box-shadow: 8px 8px 0px black;
+}
+
+.skill-card-blue {
+  background-color: #0066CC;
+  box-shadow: 8px 8px 0px black;
+}
+
+.skill-card-green {
+  background-color: #00AA00;
+  box-shadow: 8px 8px 0px black;
+}
+
+.skill-card-yellow {
+  background-color: #FFD700;
+  box-shadow: 8px 8px 0px black;
+}
+
+.skill-icon {
+  font-size: 3rem;
+}
+
+.skill-title {
+  font-family: 'Orbitron', monospace;
+}
+
+.skill-text {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Contact section styling */
+.contact-section {
+  background: linear-gradient(90deg, #E60012 0%, #DC2626 50%, #991B1B 100%);
+}
+
+.contact-title {
+  font-size: 3rem;
+  font-family: 'Orbitron', monospace;
+}
+
+.contact-subtitle {
+  font-family: 'Poppins', sans-serif;
+}
+
+.contact-form {
+  background-color: #111827;
+}
+
+.contact-button {
+  background-color: #FFD700;
+  color: black;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+.contact-info {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Footer styling */
+footer {
+  border-top: 4px solid #E60012 !important;
+}
+
+.footer-text {
+  font-family: 'Orbitron', monospace;
 }
 
 /* Custom button hover effects */
@@ -60,18 +254,17 @@ html, body, #root {
   box-shadow: 0 0 0 0.2rem rgba(230, 0, 18, 0.25);
 }
 
-/* Footer styling */
-footer {
-  border-top: 4px solid #E60012 !important;
-}
-
 /* Responsive typography */
 @media (max-width: 768px) {
   .hero-title {
     font-size: 3rem !important;
   }
   
-  h2 {
+  .section-title {
+    font-size: 2rem !important;
+  }
+  
+  .contact-title {
     font-size: 2rem !important;
   }
   
